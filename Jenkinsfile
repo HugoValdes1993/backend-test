@@ -45,25 +45,25 @@ pipeline {
                 }
             }
         }
-        // stage('Build docker image'){
-        //     steps {
-        //         sh 'docker build -t backend-node .'
-        //         script {
-        //             docker.withRegistry("https://index.docker.io/v1/","credencial-dh"){
-        //                 sh 'docker tag backend-node carlosmarind/backend-node'
-        //                 sh "docker tag backend-node carlosmarind/backend-node:${env.BUILD_NUMBER}"
-        //                 sh 'docker push carlosmarind/backend-node'
-        //                 sh "docker push carlosmarind/backend-node:${env.BUILD_NUMBER}"
-        //             }
-        //             docker.withRegistry("https://ghcr.io","credencial-gh"){
-        //                 sh 'docker tag backend-node ghcr.io/carlosmarind/backend-node'
-        //                 sh "docker tag backend-node ghcr.io/carlosmarind/backend-node:${env.BUILD_NUMBER}"
-        //                 sh 'docker push ghcr.io/carlosmarind/backend-node'
-        //                 sh "docker push ghcr.io/carlosmarind/backend-node:${env.BUILD_NUMBER}"
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Build docker image'){
+            steps {
+                sh 'docker build -t backend-node .'
+                script {
+                    docker.withRegistry("https://index.docker.io/v1/","credencial-dh"){
+                        sh 'docker tag backend-node hugovaldes1995/curso-devops-lab-final'
+                        sh "docker tag backend-node hugovaldes1995/curso-devops-lab-final:${env.BUILD_NUMBER}"
+                        sh 'docker push hugovaldes1995/curso-devops-lab-final'
+                        sh "docker push hugovaldes1995/curso-devops-lab-final:${env.BUILD_NUMBER}"
+                    }
+                    docker.withRegistry("https://ghcr.io","credencial-gh"){
+                        sh 'docker tag backend-node ghcr.io/carlosmarind/backend-node'
+                        sh "docker tag backend-node ghcr.io/carlosmarind/backend-node:${env.BUILD_NUMBER}"
+                        sh 'docker push ghcr.io/carlosmarind/backend-node'
+                        sh "docker push ghcr.io/carlosmarind/backend-node:${env.BUILD_NUMBER}"
+                    }
+                }
+            }
+        }
         // stage('Despliegue continuo') {
         //     agent{
         //         docker{
