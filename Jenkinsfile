@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages{
-        stage("Procesando aplicacion NodeJS"){
+        stage("PROCESANDO APP NODE"){
             agent { 
                 docker {
                     image "node:22"
@@ -45,7 +45,7 @@ pipeline {
                 }
             }
         }
-        stage('Build docker image'){
+        stage('BUILD DE IMAGEN DOCKER'){
             steps {
                 sh 'docker build -t backend-node .'
                 script {
@@ -64,22 +64,22 @@ pipeline {
                 }
             }
         }
-        // stage('Despliegue continuo') {
-        //     agent{
-        //         docker{
-        //             image 'alpine/k8s:1.32.2'
-        //             reuseNode true
-        //         }
-        //     }
-        //     steps {
-        //         withKubeConfig([credentialsId: 'kubeconfig-docker']){
-        //              sh "kubectl -n devops set image deployments backend-dp backend=carlosmarind/backend-node:${env.BUILD_NUMBER}"
-        //         }
-        //     }
-        // }
-        stage('fin pipeline'){
+        stage('DESPLIEGUE') {
+            agent{
+                docker{
+                    image 'alpine/k8s:1.32.2'
+                    reuseNode true
+                }
+            }
             steps {
-                echo 'finalizando pipeline'
+                withKubeConfig([credentialsId: 'kubeconfig-docker']){
+                    sh "kubectl -n hvaldes set image deployments taller-final-dp backend=ghcr.io/hugovaldes1993/backend-test:${env.BUILD_NUMBER}"
+                }
+            }
+        }
+        stage('FIN PIPILINE'){
+            steps {
+                echo '** Finalizando pipeline **'
             }
         }
     }
