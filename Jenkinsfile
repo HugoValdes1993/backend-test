@@ -56,10 +56,10 @@ pipeline {
                         sh "docker push hugovaldes1995/curso-devops-lab-final:${env.BUILD_NUMBER}"
                     }
                     docker.withRegistry("https://ghcr.io","credencial-gh"){
-                        sh 'docker tag backend-node ghcr.io/HugoValdes1993/backend-test'
-                        sh "docker tag backend-node ghcr.io/HugoValdes1993/backend-test:${env.BUILD_NUMBER}"
-                        sh 'docker push ghcr.io/HugoValdes1993/backend-test'
-                        sh "docker push ghcr.io/HugoValdes1993/backend-test:${env.BUILD_NUMBER}"
+                        sh 'docker tag backend-node ghcr.io/backend-test'
+                        sh "docker tag backend-node ghcr.io/backend-test:${env.BUILD_NUMBER}"
+                        sh 'docker push ghcr.io/backend-test'
+                        sh "docker push ghcr.io/backend-test:${env.BUILD_NUMBER}"
                     }
                 }
             }
