@@ -31,15 +31,15 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      app: taller-final-app
+      app: taller-final
   template:
     metadata:
       labels:
-        app: taller-final-app
+        app: taller-final
     spec:
       containers:
       - name: backend
-        image: hugovaldes1993/backend-test
+        image: hugovaldes1995/curso-devops-lab-final
         imagePullPolicy: Always
         env:
         - name: NODE_ENV
@@ -58,3 +58,37 @@ spec:
               name: taller-final-sc
               key: APIKEY
               optional: true
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: taller-final-svc
+  namespace: hvaldes
+  labels:
+    app: taller-final
+spec:
+  selector:
+    app: taller-final
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: taller-final-ing
+  namespace: hvaldes
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: app.devops.cl
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: taller-final-svc
+            port:
+              number: 80
