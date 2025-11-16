@@ -14,7 +14,7 @@ data:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: taller-hvaldes-sc
+  name: taller-final-sc
   namespace: hvaldes
 type: Opaque
 stringData:
