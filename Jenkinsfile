@@ -73,7 +73,7 @@ pipeline {
             }
             steps {
                 withKubeConfig([credentialsId: 'kubeconfig-docker']){
-                    sh "kubectl -n hvaldes set image deployments taller-final-dp backend=ghcr.io/hugovaldes1993/backend-test:${env.BUILD_NUMBER}"
+                    sh "kubectl -n hvaldes set image deployments taller-final-dp backend=hugovaldes1993/backend-test:${env.BUILD_NUMBER}"
                 }
             }
         }
