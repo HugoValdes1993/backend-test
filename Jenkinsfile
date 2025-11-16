@@ -16,7 +16,7 @@ pipeline {
                 stage('INSTALANDO DEPENDENCIAS'){
                     steps {
                         sh 'echo "** Instalando dependencias **"'
-                        sh 'npm ci'
+                        sh 'npm install'
                     }
                 }
                 stage('EJECUTAR LINT'){
