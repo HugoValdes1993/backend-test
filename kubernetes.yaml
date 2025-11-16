@@ -39,7 +39,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: hugovaldes1993/backend-test
+        image: hugovaldes1995/curso-devops-lab-final
         imagePullPolicy: Always
         env:
         - name: NODE_ENV
